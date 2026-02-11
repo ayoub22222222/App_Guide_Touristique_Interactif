@@ -2,6 +2,8 @@ import React from "react";
 import HeroPic from "../../assets/HeroPic.jpg"
 // import Button from "../ui/Button";
 import SearchBar from "../ui/SearchBar";
+// import ProductSection from "./ProductSection";
+import Card from "../common/Card";
 import ProductSection from "./ProductSection";
 
 export default function HeroSection({ children }) {
@@ -31,13 +33,15 @@ export default function HeroSection({ children }) {
     
   </div>
 </section>
-
-        
-                <div className="text-black overflow-visible relative font-heading min-h-screen bg-blue-400 flex justify-center gap-2 ">
-                    <p className="-mt-3">1</p>
-                    <p className="-mt-3">1</p>
-                    <p className="-mt-3">1</p>
+                <div className="text-black overflow-visible relative font-heading min-h-screen bg-blue-400 flex justify-evenly items-start">
+                    
+                    <Card num = "+10" text="total customers"/>
+                    <Card num = "+10" text="total customers"/>
+                    <Card num = "+10" text="total customers"/>
                 </div>
+
+<ProductSection />
+                
 
         </>
     )
