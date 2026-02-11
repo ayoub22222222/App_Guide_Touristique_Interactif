@@ -5,6 +5,7 @@ import SearchBar from "../ui/SearchBar";
 // import ProductSection from "./ProductSection";
 import Card from "../common/Card";
 import ProductSection from "./ProductSection";
+import ProductCard from "../common/ProductCard";
 
 export default function HeroSection({ children }) {
     return (
@@ -33,14 +34,25 @@ export default function HeroSection({ children }) {
     
   </div>
 </section>
-                <div className="text-black overflow-visible relative font-heading min-h-screen bg-blue-400 flex justify-evenly items-start">
-                    
+                <div className="text-black overflow-visible relative min-h-[20vh] font-heading flex justify-evenly items-start m-0">    
                     <Card num = "+10" text="total customers"/>
                     <Card num = "+10" text="total customers"/>
                     <Card num = "+10" text="total customers"/>
-                </div>
+                    <h1 className="font-heading font-semibold text-3xl text-center absolute translate-y-24">Destination Options</h1>
 
-<ProductSection />
+                </div>
+                    <ProductSection>
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                    </ProductSection>
+
                 
 
         </>
