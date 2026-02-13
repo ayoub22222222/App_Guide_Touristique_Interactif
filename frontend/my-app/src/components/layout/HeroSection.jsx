@@ -39,7 +39,6 @@ export default function HeroSection({ children }) {
                     <Card num = "+10" text="total customers"/>
                     <Card num = "+10" text="total customers"/>
                     <h1 className="font-heading font-semibold text-3xl text-center absolute translate-y-24">Destination Options</h1>
-
                 </div>
                     <ProductSection>
                       <ProductCard />
