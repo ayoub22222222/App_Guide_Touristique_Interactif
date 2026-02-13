@@ -6,6 +6,10 @@ import SearchBar from "../ui/SearchBar";
 import Card from "../common/Card";
 import ProductSection from "./ProductSection";
 import ProductCard from "../common/ProductCard";
+import RecomandationCard from "./RecomandationCard";
+import InspirationSection from "./InspirationSection";
+import TestoSection from "./TestoSection";
+import CustomerPicture from "../common/CustomerPicture";
 
 export default function HeroSection({ children }) {
     return (
@@ -28,7 +32,6 @@ export default function HeroSection({ children }) {
     </p>
   </div>
 
-  {/* Right content */}
   <div className="mb-20">
     <SearchBar />
     
@@ -50,7 +53,24 @@ export default function HeroSection({ children }) {
                       <ProductCard />
                       <ProductCard />
                       <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
+                      <ProductCard />
                     </ProductSection>
+
+                    <InspirationSection>
+                      <RecomandationCard />
+                      <RecomandationCard />
+                      <RecomandationCard />
+
+                    </InspirationSection>
+                    <TestoSection>
+                      <CustomerPicture />
+                      <CustomerPicture />
+                      <CustomerPicture />
+                      <CustomerPicture />
+                      <CustomerPicture />
+                    </TestoSection>
 
                 
 
