@@ -5,9 +5,9 @@ import React from "react";
 
 export default function FooterSection() {
   return (
-    <footer className="bg-black text-white py-12 px-4 font-heading">
+    <footer className="bg-black  text-white py-12 px-4 font-heading">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="flex flex-col items-start">
+        <div className="flex flex-col items-start container mx-auto px-4">
           <div className="text-3xl font-bold tracking-wide mb-3 text-secondary">Logo</div>
           <p className="text-gray-300 max-w-xs">
             Building digital experiences that transform ideas into reality. Innovation crafted with precision.
@@ -56,14 +56,7 @@ export default function FooterSection() {
           </p>
         </div>
       </div>
-      <div className="border-t border-gray-800 mt-10 pt-6 text-center text-gray-400 text-sm">
-        <p>
-          &copy; {new Date().getFullYear()} Nexus Digital Solutions. All rights reserved. 
-          <span className="block md:inline mt-1 md:mt-0 md:ml-2">
-            Designed with ❤️ in React & Tailwind CSS
-          </span>
-        </p>
-      </div>
+     
     </footer>
   );
 }

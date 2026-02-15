@@ -1,11 +1,12 @@
 import React from "react";
+import happycutomer from "../../assets/happycutomer.jpg";
 
 
 
-export default function CustomerPicture() {
+export default function CustomerPicture({className=""}) {
     return (
-         <div class="h-40 w-40 rounded-full bg-blue-600 border border-black">
-            <img src="https://images.unsplash.com/photo-1767131636996-ae27286d36fb?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="cuts" className="h-full w-full rounded-full object-cover"/>
+         <div className={`h-32 w-32 rounded-full overflow-hidden  border-2 border-secondary ${className}`}>
+            <img src={happycutomer} alt="cuts" className="h-full w-full  object-cover"/>
           </div>
     )
 }
