@@ -4,6 +4,7 @@ import './App.css';
 // import Navbar from './components/layout/Navbar';
 import HomePage from './pages/HomePage';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<HomePage />}/>
+        <Route path="/Login" element={<LoginPage />}/>
       </Routes>
       </BrowserRouter>
       

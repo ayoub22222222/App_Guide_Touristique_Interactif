@@ -1,5 +1,6 @@
 import React from "react";
 import Bali from "../../assets/Bali.jpg";
+import { Link } from "react-router-dom";
 
 
 
@@ -16,7 +17,9 @@ export default function ProductCard() {
         random text tohelp me understand
       </p>
       <div className="m-2 p-1">
-        <a href="#" role="button" class="text-white bg-black px-3 py-1 rounded-md hover:bg-secondary font-heading text-sm">learn More</a>
+        <a href="#" role="button" class="text-white bg-black px-3 py-1 rounded-md hover:bg-secondary font-heading text-sm">
+          <Link to="/Login">Learn More</Link>
+          </a>
       </div>
     </div>
   </div>

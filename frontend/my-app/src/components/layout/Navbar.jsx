@@ -11,7 +11,11 @@ export default function Navbar() {
                 </li>
                 <li className="hover:text-secondary cursor-pointer">Product</li>
                 <li className="hover:text-secondary cursor-pointer">FeedBack</li>
-                <li className="hover:text-secondary cursor-pointer">Login</li>
+                <li className="hover:text-secondary cursor-pointer">
+                    <Link to="/Login">
+                    Login
+                    </Link>
+                    </li>
             </ul>
         </nav>
         </>
