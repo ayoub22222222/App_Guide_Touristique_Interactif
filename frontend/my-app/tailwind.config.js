@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         primary: "#F5F5F5",
         secondary: "#FF9100",
-        dark: "#151414"
+        dark: "#151414",
+        card: "#D9D9D9"
       }
     },
   },
