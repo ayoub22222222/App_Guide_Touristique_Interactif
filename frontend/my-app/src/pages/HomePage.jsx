@@ -8,6 +8,7 @@ import RecomandationCard from "../components/layout/RecomandationCard";
 import TestoSection from "../components/layout/TestoSection";
 import CustomerPicture from "../components/common/CustomerPicture";
 import FooterSection from "../components/layout/FooterSection";
+import BtnHome from "../components/common/BtnHome";
 
 export default function HomePage() {
     return (
@@ -17,18 +18,42 @@ export default function HomePage() {
         </HeroSection>
         <ProductSection>
             
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
+            <ProductCard>
+                <BtnHome />
+            </ProductCard>
         </ProductSection>
         <InspirationSection>
             <RecomandationCard />

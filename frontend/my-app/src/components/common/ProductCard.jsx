@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 
-export default function ProductCard() {
+export default function ProductCard({ children }) {
     return (
 
     <div className="w-60  bg-gray-300 overflow-hidden rounded-2xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl ">
@@ -17,9 +17,10 @@ export default function ProductCard() {
         random text tohelp me understand
       </p>
       <div className="m-2 p-1">
-        <a href="#" role="button" class="text-white bg-black px-3 py-1 rounded-md hover:bg-secondary font-heading text-sm">
-          <Link to="/Login">Learn More</Link>
-          </a>
+        {/* <a href="#" role="button" class="text-white bg-black px-3 py-1 rounded-md hover:bg-secondary font-heading text-sm">
+          <Link to="/Login">Learn More</Link> */}
+          { children }
+          
       </div>
     </div>
   </div>
