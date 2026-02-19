@@ -18,6 +18,7 @@ function App() {
         <Route path="/" element={<HomePage />}/>
         <Route path="/Login" element={<LoginPage />}/>
         <Route path="/product" element={<ProductPage />}/>
+        <Route path="/feedback" element={<FeedBackPage />}/>
       </Routes>
     </BrowserRouter>
 
