@@ -6,20 +6,21 @@ import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import FeedBackPage from './pages/FeedBackpage';
 
 
 function App() {
   return (
-  
-      <BrowserRouter>
+
+    <BrowserRouter>
       <Routes>
 
         <Route path="/" element={<HomePage />}/>
         <Route path="/Login" element={<LoginPage />}/>
         <Route path="/product" element={<ProductPage />}/>
       </Routes>
-      </BrowserRouter>
-      
+    </BrowserRouter>
+
   );
 }
 
