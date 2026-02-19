@@ -10,7 +10,7 @@ export default function Navbar() {
                     <Link to="/">Home</Link>
                 </li>
                 <li className="hover:text-secondary cursor-pointer">Product</li>
-                <li className="hover:text-secondary cursor-pointer">FeedBack</li>
+                <li className="hover:text-secondary cursor-pointer"><Link to="/Feedback">Feedback</Link></li>
                 <li className="hover:text-secondary cursor-pointer">
                     <Link to="/Login">
                     Login
