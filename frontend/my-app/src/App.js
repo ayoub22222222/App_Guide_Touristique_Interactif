@@ -3,6 +3,7 @@ import './App.css';
 // import HeroSection from './components/layout/HeroSection';
 // import Navbar from './components/layout/Navbar';
 import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import FeedBackPage from './pages/FeedBackpage';
@@ -14,11 +15,9 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<HomePage />} />
-        <Route path="/Login" element={<LoginPage />} />
-        <Route path="/feedback" element={<FeedBackPage />} />
-
-
+        <Route path="/" element={<HomePage />}/>
+        <Route path="/Login" element={<LoginPage />}/>
+        <Route path="/product" element={<ProductPage />}/>
       </Routes>
     </BrowserRouter>
 
