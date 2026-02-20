@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Heart } from "lucide-react";
+import React from "react";
+// import { Heart } from "lucide-react";
 
 export default function FavoriteButton() {
   const [liked, setLiked] = useState(false);
@@ -14,13 +15,13 @@ export default function FavoriteButton() {
         border: liked ? "1px solid #FF9100" : "1px solid black"
       }}
     >
-      <Heart
+      {/* <Heart
         size={16}
         style={{
           fill: liked ? "white" : "none",
           stroke: "white"
         }}
-      />
+      /> */}
       Favorite
     </button>
   );
