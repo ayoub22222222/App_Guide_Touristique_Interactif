@@ -9,7 +9,7 @@ export default function ProductCard({ children }) {
 
     <div className="w-60  bg-gray-300 overflow-hidden rounded-2xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl ">
   
-    <img src={Bali} alt="" className="h-full object-cover w-full" />
+    <img src={Bali} alt="" className=" object-cover w-full" />
     <div>
       <h2 className="font-bold text-lg p-2 m-1 font-heading">Oxford Walking Tour</h2>
       
