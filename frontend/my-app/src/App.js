@@ -5,6 +5,8 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import DashbordPage from './pages/DashboardPage';
+
 
 
 function App() {
@@ -15,6 +17,9 @@ function App() {
 
         <Route path="/" element={<HomePage />}/>
         <Route path="/Login" element={<LoginPage />}/>
+        <Route path="/Dashboard" element={<DashbordPage />}/> 
+        
+        
       </Routes>
       </BrowserRouter>
       
