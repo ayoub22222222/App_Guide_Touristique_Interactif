@@ -3,16 +3,18 @@ import './App.css';
 // import HeroSection from './components/layout/HeroSection';
 // import Navbar from './components/layout/Navbar';
 import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashbordPage from './pages/DashboardPage';
 
+import FeedBackPage from './pages/FeedBackpage';
 
 
 function App() {
   return (
-  
-      <BrowserRouter>
+
+    <BrowserRouter>
       <Routes>
 
         <Route path="/" element={<HomePage />}/>
@@ -20,9 +22,11 @@ function App() {
         <Route path="/Dashboard" element={<DashbordPage />}/> 
         
         
+        <Route path="/product" element={<ProductPage />}/>
+        <Route path="/feedback" element={<FeedBackPage />}/>
       </Routes>
-      </BrowserRouter>
-      
+    </BrowserRouter>
+
   );
 }
 
