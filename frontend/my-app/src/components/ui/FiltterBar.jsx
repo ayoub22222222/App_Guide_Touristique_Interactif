@@ -1,10 +1,14 @@
-// sallman
-
 import { useRef, useState, useEffect } from "react";
-import { categories } from "../../Data/Data";
+
+// ✅ Define the 4 categories directly in this file
+const CATEGORIES = [
+  { id: 1, name: "All", value: "All" },
+  { id: 2, name: "Places", value: "Places" },
+  { id: 3, name: "Hotels", value: "Hotels" },
+  { id: 4, name: "Transport", value: "Transport" }
+];
 
 function AnimatedCategoryTabs({
-  categories,
   selectedCategory,
   setSelectedCategory,
 }) {
@@ -25,37 +29,37 @@ function AnimatedCategoryTabs({
         transform: `translateX(${activeBtn.offsetLeft}px)`,
       });
     }
-  }, [selectedCategory, categories]);
+  }, [selectedCategory]);
 
   return (
     <div
       ref={containerRef}
       className="
-        relative flex gap-5
-        bg-neutral-200 p-2 rounded-full text-sm
+        relative flex gap-2
+        bg-neutral-200 p-1.5 rounded-full text-sm
         overflow-x-auto whitespace-nowrap
         scrollbar-hide max-w-full
         md:overflow-visible md:flex-wrap md:justify-center
       "
     >
-      {/* Sliding background */}
+      {/* Sliding background indicator */}
       <span
         className="
-          absolute top-2 left-2 h-[calc(100%-1rem)]
+          absolute top-1.5 left-1.5 h-[calc(100%-0.75rem)]
           bg-black rounded-full shadow-md
           transition-all duration-300 ease-out
         "
         style={indicatorStyle}
       />
 
-      {/* Buttons */}
-      {categories.map((category) => (
+      {/* Category buttons */}
+      {CATEGORIES.map((category) => (
         <button
           key={category.id}
           data-value={category.value}
           onClick={() => setSelectedCategory(category.value)}
           className={`
-            relative z-10 px-5 py-2 rounded-full shrink-0 font-medium
+            relative z-10 px-4 py-2 rounded-full shrink-0 font-medium
             transition-all duration-300
             ${
               selectedCategory === category.value
@@ -85,7 +89,6 @@ export default function FilterBar({ onFilterChange, activeCategory = "All" }) {
     return (
         <div className="w-full flex justify-center px-4">
             <AnimatedCategoryTabs
-                categories={categories}
                 selectedCategory={selectedCategory}
                 setSelectedCategory={handleCategoryChange}
             />
