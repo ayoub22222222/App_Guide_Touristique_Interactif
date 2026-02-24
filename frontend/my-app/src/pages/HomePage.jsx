@@ -9,51 +9,53 @@ import TestoSection from "../components/layout/TestoSection";
 import CustomerPicture from "../components/common/CustomerPicture";
 import FooterSection from "../components/layout/FooterSection";
 import BtnHome from "../components/common/BtnHome";
+import { useEffect, useState } from "react";
+// import { response } from "../../../../backend/src/app";
+
+const API_URL = 'http://localhost:5000/api'
+
 
 export default function HomePage() {
-    return (
+    const [moroccoCities, setMoroccoCities] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+    fetch(`${API_URL}/countries/ma`)  
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch');
+        return res.json();
+      })
+      .then(data => {
+        setMoroccoCities(data.country?.cities || []);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+
+
+
+        return (
         <>
         <HeroSection>
             <Navbar />
         </HeroSection>
         <ProductSection>
+        {moroccoCities.map(city => (
+          <ProductCard
+            key={city.id}
+            title={city.name}
+            description={city.description}
+            image={city.image}
             
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
-            <ProductCard>
-                <BtnHome />
-            </ProductCard>
+          >
+            <BtnHome to={`/product/ma/${city.id}`}/>
+          </ProductCard>
+        ))}
         </ProductSection>
         <InspirationSection>
             <RecomandationCard />

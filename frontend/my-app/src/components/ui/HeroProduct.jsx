@@ -4,7 +4,7 @@ import { Data } from "../../Data/Data";
 
 
 
-export default function HeroProduct() {
+export default function HeroProduct({}) {
   const [filteredData, setFilteredData] = useState(Data);
     const [activeCategory, setActiveCategory] = useState("All");
   

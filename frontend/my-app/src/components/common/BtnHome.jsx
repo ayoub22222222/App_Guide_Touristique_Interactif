@@ -1,13 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 
-
-export default function BtnHome() {
-    return (
-        <>
-        <a href="#" role="button" class="text-white bg-black px-3 py-1 rounded-md hover:bg-secondary font-heading text-sm">
-          <Link to="/Login">Learn More</Link>
-          </a>
-        </>
-    )
+export default function BtnHome({ to = "/product" }) {
+  return (
+    <Link
+      to={to}
+      className="text-white bg-black px-3 py-1 rounded-md hover:bg-secondary font-heading text-sm inline-block"
+    >
+      Learn More
+    </Link>
+  );
 }
