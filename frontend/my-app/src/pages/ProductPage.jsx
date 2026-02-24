@@ -77,7 +77,14 @@ return (
                   description={item.description}
                   image={item.image}
                 >
-                  <BtnProduct>
+                  <BtnProduct
+                        item={item}  // ✅ Pass full item object
+                        to={`/item/${item.type?.toLowerCase() || 'place'}/${item.id}`}
+                        onAdded={(addedItem) => {
+        // Optional: Show toast notification
+                        console.log(`✅ Added: ${addedItem.name}`);
+                    }}
+                  >
                     <span>Add to plan</span>
                   </BtnProduct>
                 </ProductCard>
