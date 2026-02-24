@@ -12,6 +12,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+// app.use("/images", express.static(path.join(__dirname, "../public/images")));
 app.use('/users', userRouter)
 app.use("/api", countryRoutes);
 

@@ -51,9 +51,9 @@ export default function HomePage() {
             title={city.name}
             description={city.description}
             image={city.image}
-            link={`/country/ma/city/${city.id}`}
+            
           >
-            <BtnHome />
+            <BtnHome to={`/product/ma/${city.id}`}/>
           </ProductCard>
         ))}
         </ProductSection>

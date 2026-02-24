@@ -9,77 +9,88 @@ import HeroProduct from "../components/ui/HeroProduct";
 import ProductSection from "../components/layout/ProductSection";
 import ProductDestination from "../components/layout/ProductDestination";
 import { useParams } from "react-router-dom";
-
-export default function ProductPage() { 
-
+import { useMemo } from "react";
 
 
-  return (
-   <>
+
+
+
+
+export default function ProductPage() {
+  const API_URL = "http://localhost:5000/api"
+  const { countryId = "ma", cityId } = useParams();
+
+  const [country, setCountry] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    fetch(`${API_URL}/countries/${countryId}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch country data");
+        return res.json();
+      })
+      .then((data) => {
+        setCountry(data.country || null);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [countryId]);
+
+  const city = useMemo(() => {
+    if (!country) return null;
+    if (!cityId) return country.cities?.[0] || null;
+    return country.cities?.find((item) => item.id === cityId) || null;
+  }, [country, cityId]);
+
+  const relatedItems = useMemo(() => {
+    if (!city) return [];
+    return [...(city.places || []), ...(city.transport || []), ...(city.hotels || [])];
+  }, [city]);
+return (
+    <>
       <Navbar />
-      
-       <HeroProduct /> 
+      <HeroProduct />
 
-<ProductDestination>
-  <ProductCard>
-                    <BtnProduct>
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/>
-                    </svg> 
-                    <span>Add to plan</span> 
-                    </BtnProduct>
-                      </ProductCard>
-                      <ProductCard>
-                    <BtnProduct>
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/>
-                    </svg> 
-                    <span>Add to plan</span> 
-                    </BtnProduct>
-                      </ProductCard>
-                      <ProductCard>
-                    <BtnProduct>
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/>
-                    </svg> 
-                    <span>Add to plan</span> 
-                    </BtnProduct>
-                      </ProductCard>
-                      <ProductCard>
-                    <BtnProduct>
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="20" 
-                    height="20" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/>
-                    </svg> 
-                    <span>Add to plan</span> 
-                    </BtnProduct>
-                      </ProductCard>
-</ProductDestination>
-      
+      {loading && <p className="text-center py-4">Loading product data...</p>}
+      {error && <p className="text-center py-4 text-red-600">{error}</p>}
+
+      {!loading && !error && (
+        <>
+          <div className="max-w-5xl mx-auto px-4 pt-6">
+            <h1 className="text-2xl font-heading font-semibold">{city?.name || "City not found"}</h1>
+            <p className="text-sm text-gray-700 mt-2">{city?.description || "No city description available."}</p>
+          </div>
+
+          <ProductDestination>
+            {relatedItems.length > 0 ? (
+              relatedItems.map((item) => (
+                <ProductCard
+                  key={item.id}
+                  title={item.name}
+                  description={item.description}
+                  image={item.image}
+                >
+                  <BtnProduct>
+                    <span>Add to plan</span>
+                  </BtnProduct>
+                </ProductCard>
+              ))
+            ) : (
+              <p className="text-center w-full">No data found for this city.</p>
+            )}
+          </ProductDestination>
+        </>
+      )}
+
       <FooterSection />
-          </>  
+    </>
   );
 }
+

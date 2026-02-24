@@ -23,6 +23,7 @@ function App() {
         
         
         <Route path="/product" element={<ProductPage />}/>
+        <Route path="/product/:countryId/:cityId" element={<ProductPage />} />
         <Route path="/feedback" element={<FeedBackPage />}/>
       </Routes>
     </BrowserRouter>
