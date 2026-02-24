@@ -1,28 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
+
+import React, { useState, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
 import ProductCard from "../components/common/ProductCard";
 import BtnProduct from "../components/common/BtnProduct";
 import FilterBar from "../components/ui/FiltterBar";
 import FooterSection from "../components/layout/FooterSection";
-import { Data, categories } from "../Data/Data";
 import HeroProduct from "../components/ui/HeroProduct";
-import ProductSection from "../components/layout/ProductSection";
 import ProductDestination from "../components/layout/ProductDestination";
-import { useParams } from "react-router-dom";
-import { useMemo } from "react";
 
-
-
-
-
+const API_URL = "http://localhost:5000/api";
 
 export default function ProductPage() {
-  const API_URL = "http://localhost:5000/api"
   const { countryId = "ma", cityId } = useParams();
 
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // ✅ ADD: Filter state
+  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
     setLoading(true);
@@ -49,55 +46,89 @@ export default function ProductPage() {
     return country.cities?.find((item) => item.id === cityId) || null;
   }, [country, cityId]);
 
-  const relatedItems = useMemo(() => {
+  // ✅ ADD: Filter items based on activeCategory
+  const filteredItems = useMemo(() => {
     if (!city) return [];
-    return [...(city.places || []), ...(city.transport || []), ...(city.hotels || [])];
-  }, [city]);
-return (
+    
+    if (activeCategory === "All") {
+      // Return all items with type property for badges
+      return [
+        ...(city.places || []).map(item => ({ ...item, type: "Places" })),
+        ...(city.transport || []).map(item => ({ ...item, type: "Transport" })),
+        ...(city.hotels || []).map(item => ({ ...item, type: "Hotels" }))
+      ];
+    } else {
+      // Return only items of selected category
+      const categoryKey = activeCategory.toLowerCase(); // "places", "transport", or "hotels"
+      return (city[categoryKey] || []).map(item => ({ ...item, type: activeCategory }));
+    }
+  }, [city, activeCategory]); // ✅ Re-run when category changes
+
+  // ✅ ADD: Handle filter changes from FilterBar
+  const handleFilterChange = (category) => {
+    setActiveCategory(category);
+  };
+
+  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (error) return <div className="text-center py-10 text-red-600">{error}</div>;
+  if (!city) return <div className="text-center py-10">City not found</div>;
+
+  return (
     <>
       <Navbar />
-      <HeroProduct />
+      
+      {/* ✅ PASS: handleFilterChange to HeroProduct → FilterBar */}
+      <HeroProduct onFilterChange={handleFilterChange} activeCategory={activeCategory} />
 
-      {loading && <p className="text-center py-4">Loading product data...</p>}
-      {error && <p className="text-center py-4 text-red-600">{error}</p>}
+      {/* City header */}
+      <div className="max-w-5xl mx-auto px-4 pt-6">
+        <h1 className="text-2xl font-heading font-semibold">{city.name}</h1>
+        <p className="text-sm text-gray-700 mt-2">{city.description}</p>
+        
+        {/* Quick stats */}
+        <div className="mt-4 flex flex-wrap gap-2 text-sm">
+          <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full">
+            🏛️ {city.places?.length || 0} Places
+          </span>
+          <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full">
+            🚌 {city.transport?.length || 0} Transport
+          </span>
+          <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full">
+            🏨 {city.hotels?.length || 0} Hotels
+          </span>
+        </div>
+      </div>
 
-      {!loading && !error && (
-        <>
-          <div className="max-w-5xl mx-auto px-4 pt-6">
-            <h1 className="text-2xl font-heading font-semibold">{city?.name || "City not found"}</h1>
-            <p className="text-sm text-gray-700 mt-2">{city?.description || "No city description available."}</p>
-          </div>
-
-          <ProductDestination>
-            {relatedItems.length > 0 ? (
-              relatedItems.map((item) => (
-                <ProductCard
-                  key={item.id}
-                  title={item.name}
-                  description={item.description}
-                  image={item.image}
-                >
-                  <BtnProduct
-                        item={item}  // ✅ Pass full item object
-                        to={`/item/${item.type?.toLowerCase() || 'place'}/${item.id}`}
-                        onAdded={(addedItem) => {
-        // Optional: Show toast notification
-                        console.log(`✅ Added: ${addedItem.name}`);
-                    }}
-                  >
-                    <span>Add to plan</span>
-                  </BtnProduct>
-                </ProductCard>
-              ))
-            ) : (
-              <p className="text-center w-full">No data found for this city.</p>
-            )}
-          </ProductDestination>
-        </>
-      )}
+      {/* Items grid */}
+      <ProductDestination>
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => (
+            <ProductCard
+              key={item.id}
+              title={item.name}
+              description={item.description}
+              image={item.image}
+              type={item.type} // ✅ Pass type for badge display
+            >
+              <BtnProduct
+                item={item}
+                to={`/item/${item.type?.toLowerCase() || 'place'}/${item.id}`}
+                onAdded={(addedItem) => {
+                  console.log(`✅ Added: ${addedItem.name}`);
+                }}
+              >
+                <span>Add to plan</span>
+              </BtnProduct>
+            </ProductCard>
+          ))
+        ) : (
+          <p className="text-center w-full py-8 text-neutral-500">
+            No {activeCategory.toLowerCase()} found for {city.name}.
+          </p>
+        )}
+      </ProductDestination>
 
       <FooterSection />
     </>
   );
 }
-

@@ -1,15 +1,8 @@
 import React from "react";
 import HeroPic from "../../assets/HeroPic.jpg"
-// import Button from "../ui/Button";
 import SearchBar from "../ui/SearchBar";
-// import ProductSection from "./ProductSection";
 import Card from "../common/Card";
-// import ProductSection from "./ProductSection";
-// import ProductCard from "../common/ProductCard";
-// import RecomandationCard from "./RecomandationCard";
-// import InspirationSection from "./InspirationSection";
-// import TestoSection from "./TestoSection";
-// import CustomerPicture from "../common/CustomerPicture";
+
 
 export default function HeroSection({ children }) {
     return (
@@ -44,35 +37,6 @@ export default function HeroSection({ children }) {
                     <Card num = "+10" text="total customers"/>
                     <h1 className="font-heading font-semibold text-3xl text-center absolute translate-y-24 z-10">Destination Options</h1>
                 </div>
-                    {/* <ProductSection>
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                      <ProductCard />
-                    </ProductSection>
-
-                    <InspirationSection>
-                      <RecomandationCard />
-                      <RecomandationCard />
-                      <RecomandationCard />
-
-                    </InspirationSection>
-                    <TestoSection>
-                      <CustomerPicture className="translate-y-20"/>
-                      <CustomerPicture className="-translate-y-4" />
-                      <CustomerPicture className="translate-y-32" />
-                      <CustomerPicture className="-translate-y-18" />
-                      <CustomerPicture className="translate-y-40 translate-x-5" />
-                    </TestoSection> */}
-
                 
 
         </>
