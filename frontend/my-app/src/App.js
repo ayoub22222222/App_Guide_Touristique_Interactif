@@ -8,6 +8,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashbordPage from './pages/DashboardPage';
 import FavoritePage from './pages/FavoritePage';
+import ProtectedRoute from './components/common/ProtectedRoute';
 
 import FeedBackPage from './pages/FeedBackpage';
 
@@ -19,16 +20,51 @@ function App() {
       <Routes>
 
         <Route path="/" element={<HomePage />}/>
+        <Route path="/login" element={<LoginPage />}/>
         <Route path="/Login" element={<LoginPage />}/>
-        <Route path="/Dashboard" element={<DashbordPage />}/> 
-
-    
-      <Route path="/favorites" element={<FavoritePage />} /> 
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <DashbordPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Dashboard"
+          element={
+            <ProtectedRoute>
+              <DashbordPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <ProtectedRoute>
+              <FavoritePage />
+            </ProtectedRoute>
+          }
+        />
   
         
         
-        <Route path="/product" element={<ProductPage />}/>
-        <Route path="/product/:countryId/:cityId" element={<ProductPage />} />
+        <Route
+          path="/product"
+          element={
+            <ProtectedRoute>
+              <ProductPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/product/:countryId/:cityId"
+          element={
+            <ProtectedRoute>
+              <ProductPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/feedback" element={<FeedBackPage />}/>
       </Routes>
     </BrowserRouter>

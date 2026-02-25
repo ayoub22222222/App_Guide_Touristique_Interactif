@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
+import { clearSession, getCurrentUser } from "../../utils/auth";
 
 export default function DashboardLayout({ children }) {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [profileImage, setProfileImage] = useState(null);
+  const user = getCurrentUser();
 
   const handleImageClick = () => {
     fileInputRef.current.click();
@@ -22,7 +24,8 @@ export default function DashboardLayout({ children }) {
   };
 
   const handleLogout = () => {
-    navigate("/Login");
+    clearSession();
+    navigate("/login");
   };
 
   return (
@@ -48,6 +51,10 @@ export default function DashboardLayout({ children }) {
                 "👤"
               )}
             </div>
+
+            <p className="text-base font-medium text-gray-700">
+              {user ? `${user.firstname} ${user.lastname}` : "Guest"}
+            </p>
 
             <p
               className="text-sm text-gray-600 cursor-pointer hover:text-orange-500"
