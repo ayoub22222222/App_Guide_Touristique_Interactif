@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }) {
             <nav className="space-y-8 text-gray-800 w-full">
 
               <div
-                onClick={() => navigate("/Login")}
+                onClick={() => navigate("/dashboard")}
                 className="cursor-pointer hover:text-orange-500 text-lg px-4"
               >
                  Profil
@@ -89,11 +89,12 @@ export default function DashboardLayout({ children }) {
               >
                 Home Page
               </div>
-
-              <div className="cursor-pointer hover:text-orange-500 text-lg px-4">
-                 Favorite
-              </div>
-
+<div
+  onClick={() => navigate("/favorites")}  // ✅ Add navigation
+  className="cursor-pointer hover:text-orange-500 text-lg px-4"
+>
+  Favorite
+</div>
             </nav>
           </div>
 

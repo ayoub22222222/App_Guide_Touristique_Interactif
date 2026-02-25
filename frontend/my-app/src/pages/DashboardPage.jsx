@@ -84,21 +84,30 @@
 // }
 
 // pages/DashboardPage.jsx
+// pages/DashboardPage.jsx
+// pages/DashboardPage.jsx
+// pages/DashboardPage.jsx
+// pages/DashboardPage.jsx
 import { useState, useEffect } from "react";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import DashboardSearch from "../components/ui/DashboardSearch";
 import ProductCard from "../components/common/ProductCard";
-import BtnProduct from "../components/common/BtnProduct";
 import { getPlanItems, removeFromPlan } from "../utils/plan";
+import { addToFavorites, removeFromFavorites, isInFavorites, getFavorites } from "../utils/favorites";
 
 export default function DashboardPage() {
   const [search, setSearch] = useState("");
   const [planItems, setPlanItems] = useState([]);
+  const [favoriteIds, setFavoriteIds] = useState([]);
 
   // Load planned items on mount
   useEffect(() => {
     const items = getPlanItems();
     setPlanItems(items);
+    
+    // Load favorite IDs
+    const favorites = getFavorites();
+    setFavoriteIds(favorites.map(f => f.id));
   }, []);
 
   // Filter by search
@@ -110,7 +119,20 @@ export default function DashboardPage() {
   // Remove item from plan
   const handleRemove = (itemId) => {
     removeFromPlan(itemId);
-    setPlanItems(getPlanItems()); // Refresh state
+    setPlanItems(getPlanItems());
+  };
+
+  // Toggle favorite status
+  const handleToggleFavorite = (item) => {
+    const isFavorited = favoriteIds.includes(item.id);
+    
+    if (isFavorited) {
+      removeFromFavorites(item.id);
+      setFavoriteIds(favoriteIds.filter(id => id !== item.id));
+    } else {
+      addToFavorites(item);
+      setFavoriteIds([...favoriteIds, item.id]);
+    }
   };
 
   return (
@@ -147,47 +169,64 @@ export default function DashboardPage() {
             </p>
           </div>
         ) : (
-          /* Items grid */
           <div className="max-w-6xl mx-auto px-4 py-6">
             <div className="flex flex-wrap gap-6 justify-center">
               {filteredItems.length > 0 ? (
-                filteredItems.map((item) => (
-                  <div key={item.id} className="relative group">
-                    <ProductCard
-                      title={item.name}
-                      description={item.description}
-                      image={item.image}
-                      type={item.type}
-                    >
-                      <div className="flex gap-2">
-                        <BtnProduct
-                          item={item}
-                          className="bg-green-100 text-green-700 hover:bg-green-200"
-                        >
-                          <span>Added ✓</span>
-                        </BtnProduct>
-                        
-                        {/* Remove button */}
-                        <button
-                          onClick={() => handleRemove(item.id)}
-                          className="flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-lg hover:bg-red-200 transition"
-                          title="Remove from plan"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                          </svg>
-                        </button>
-                      </div>
-                    </ProductCard>
-                    
-                    {/* Type badge */}
-                    {item.type && (
-                      <span className="absolute top-2 right-2 px-2 py-1 text-xs rounded-full bg-neutral-800 text-white">
-                        {item.type}
-                      </span>
-                    )}
-                  </div>
-                ))
+                filteredItems.map((item) => {
+                  const isFavorited = favoriteIds.includes(item.id);
+                  
+                  return (
+                    <div key={item.id} className="relative group">
+                      <ProductCard
+                        title={item.name}
+                        description={item.description}
+                        image={item.image}
+                        type={item.type}
+                      >
+                        {/* ✅ 2 BUTTONS: Favorite (left) + Delete (right) */}
+                        <div className="flex justify-between items-center mt-2 px-2">
+                          
+                          {/* 1. Favorite button - LEFT SIDE - Changes to orange when favorited */}
+                          <button
+                            onClick={() => handleToggleFavorite(item)}
+                            className={`
+                              px-3 py-2 rounded-lg transition flex items-center gap-1.5
+                              ${isFavorited 
+                                ? 'bg-orange-100 text-orange-600' 
+                                : 'bg-red-100 text-red-600 hover:bg-red-200'
+                              }
+                            `}
+                            title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill={isFavorited ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2">
+                              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            <span className="text-sm font-medium">Favorite</span>
+                          </button>
+                          
+                          {/* 2. Delete button - RIGHT SIDE */}
+                          <button
+                            onClick={() => handleRemove(item.id)}
+                            className="p-2.5 bg-neutral-100 text-neutral-600 rounded-lg hover:bg-neutral-200 transition flex items-center gap-1.5"
+                            title="Remove from plan"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
+                          </button>
+                          
+                        </div>
+                      </ProductCard>
+                      
+                      {/* Type badge */}
+                      {item.type && (
+                        <span className="absolute top-2 right-2 px-2 py-1 text-xs rounded-full bg-neutral-800 text-white">
+                          {item.type}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })
               ) : (
                 <p className="text-center w-full py-8 text-neutral-500">
                   No items match "{search}"

@@ -7,6 +7,7 @@ import ProductPage from './pages/ProductPage';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashbordPage from './pages/DashboardPage';
+import FavoritePage from './pages/FavoritePage';
 
 import FeedBackPage from './pages/FeedBackpage';
 
@@ -20,6 +21,10 @@ function App() {
         <Route path="/" element={<HomePage />}/>
         <Route path="/Login" element={<LoginPage />}/>
         <Route path="/Dashboard" element={<DashbordPage />}/> 
+
+    
+      <Route path="/favorites" element={<FavoritePage />} /> 
+  
         
         
         <Route path="/product" element={<ProductPage />}/>
