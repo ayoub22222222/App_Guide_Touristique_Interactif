@@ -28,7 +28,7 @@
 // components/layout/InspirationSection.jsx
 export default function InspirationSection({ children }) {
   return (
-    <section className="py-16 bg-white border-t border-gray-100">
+    <section className="pt-2 mt-10 bg-red-300 border-t border-gray-100 bg-gradient-to-r from-slate-600 to-slate-100">
       <div className="container mx-auto px-4">
         
         {/* Heading Section - More spacing from top */}
