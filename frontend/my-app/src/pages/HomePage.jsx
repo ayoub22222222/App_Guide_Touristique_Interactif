@@ -1,80 +1,3 @@
-// import React from "react";
-// import HeroSection from "../components/layout/HeroSection";
-// import Navbar from "../components/layout/Navbar";
-// import ProductSection from "../components/layout/ProductSection";
-// import ProductCard from "../components/common/ProductCard";
-// import InspirationSection from "../components/layout/InspirationSection";
-// import RecomandationCard from "../components/layout/RecomandationCard";
-// import TestoSection from "../components/layout/TestoSection";
-// import CustomerPicture from "../components/common/CustomerPicture";
-// import FooterSection from "../components/layout/FooterSection";
-// import BtnHome from "../components/common/BtnHome";
-// import { useEffect, useState } from "react";
-// // import { response } from "../../../../backend/src/app";
-
-// const API_URL = 'http://localhost:5000/api'
-
-
-// export default function HomePage() {
-//     const [moroccoCities, setMoroccoCities] = useState([]);
-//     const [loading, setLoading] = useState(true);
-//     const [error, setError] = useState(null);
-
-//     useEffect(() => {
-//     fetch(`${API_URL}/countries/ma`)  
-//       .then(res => {
-//         if (!res.ok) throw new Error('Failed to fetch');
-//         return res.json();
-//       })
-//       .then(data => {
-//         setMoroccoCities(data.country?.cities || []);
-//         setLoading(false);
-//       })
-//       .catch(err => {
-//         setError(err.message);
-//         setLoading(false);
-//       });
-//   }, []);
-
-
-
-
-//         return (
-//         <>
-//         <HeroSection>
-//             <Navbar />
-//         </HeroSection>
-//         <ProductSection>
-//         {moroccoCities.map(city => (
-//           <ProductCard
-//             key={city.id}
-//             title={city.name}
-//             description={city.description}
-//             image={city.image}
-            
-//           >
-//             <BtnHome to={`/product/ma/${city.id}`}/>
-//           </ProductCard>
-//         ))}
-//         </ProductSection>
-//         <InspirationSection>
-//             <RecomandationCard />
-//             <RecomandationCard />
-//             <RecomandationCard />
-//         </InspirationSection>
-//         <TestoSection>
-//              <CustomerPicture className="translate-y-20"/>
-//              <CustomerPicture className="-translate-y-4" />
-//              <CustomerPicture className="translate-y-32" />
-//              <CustomerPicture className="-translate-y-18" />
-//              <CustomerPicture className="translate-y-40 translate-x-5" />
-//         </TestoSection>
-//         <FooterSection />
-//         </>
-//     )
-// }
-
-// pages/HomePage.jsx
 import React, { useEffect, useState } from "react";
 import HeroSection from "../components/layout/HeroSection";
 import Navbar from "../components/layout/Navbar";
@@ -94,6 +17,10 @@ export default function HomePage() {
   const [franceCities, setFranceCities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // ✅ ADD: Filter state
+  const [selectedCountry, setSelectedCountry] = useState("ma");
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -120,7 +47,16 @@ export default function HomePage() {
     fetchData();
   }, []);
 
-  // Find specific cities for recommendations
+  // ✅ ADD: Get cities for selected country
+  const currentCities = selectedCountry === "ma" ? moroccoCities : franceCities;
+
+  // ✅ ADD: Filter cities by search query
+  const filteredCities = currentCities.filter(city =>
+    city.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    city.description?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // Find specific cities for recommendations (unchanged)
   const marrakech = moroccoCities.find(c => c.id === 'ma-marrakech');
   const paris = franceCities.find(c => c.id === 'fr-paris');
   const toulouse = franceCities.find(c => c.id === 'fr-toulouse');
@@ -130,29 +66,43 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroSection>
-        <Navbar />
-      </HeroSection>
+     <HeroSection 
+  onCountryChange={setSelectedCountry}
+  onSearchChange={setSearchQuery}
+  selectedCountry={selectedCountry}
+>
+  <Navbar />
+</HeroSection>
       
       <ProductSection>
-        {moroccoCities.map(city => (
-          <ProductCard
-            key={city.id}
-            title={city.name}
-            description={city.description}
-            image={city.image}
-          >
-            <BtnHome to={`/product/ma/${city.id}`}/>
-          </ProductCard>
-        ))}
+        {/* ✅ PASS: Filter handlers to SearchBar via HeroSection */}
+        {/* Note: You'll need to update HeroSection to forward these props */}
+        
+        {filteredCities.length > 0 ? (
+          filteredCities.map(city => (
+            <ProductCard
+              key={city.id}
+              title={city.name}
+              description={city.description}
+              image={city.image}
+            >
+              <BtnHome to={`/product/${selectedCountry}/${city.id}`}/>
+            </ProductCard>
+          ))
+        ) : (
+          <div className="col-span-full text-center py-10 text-neutral-500">
+            <p className="text-lg">No cities found{searchQuery && ` for "${searchQuery}"`}</p>
+            <p className="text-sm mt-1">Try searching for something else</p>
+          </div>
+        )}
       </ProductSection>
 
-      {/* ✅ Inspiration Section with dynamic city data */}
-<InspirationSection>
-  {marrakech && <RecomandationCard city={marrakech} countryId="ma" />}
-  {paris && <RecomandationCard city={paris} countryId="fr" />}
-  {toulouse && <RecomandationCard city={toulouse} countryId="fr" />}
-</InspirationSection>
+      {/* Inspiration Section (unchanged) */}
+      <InspirationSection>
+        {marrakech && <RecomandationCard city={marrakech} countryId="ma" />}
+        {paris && <RecomandationCard city={paris} countryId="fr" />}
+        {toulouse && <RecomandationCard city={toulouse} countryId="fr" />}
+      </InspirationSection>
 
       <TestoSection>
         <CustomerPicture className="translate-y-20"/>

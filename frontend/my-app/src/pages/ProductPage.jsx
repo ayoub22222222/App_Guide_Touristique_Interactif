@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/layout/Navbar";
@@ -17,8 +16,6 @@ export default function ProductPage() {
   const [country, setCountry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
-  // ✅ ADD: Filter state
   const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
@@ -46,25 +43,21 @@ export default function ProductPage() {
     return country.cities?.find((item) => item.id === cityId) || null;
   }, [country, cityId]);
 
-  // ✅ ADD: Filter items based on activeCategory
   const filteredItems = useMemo(() => {
     if (!city) return [];
     
     if (activeCategory === "All") {
-      // Return all items with type property for badges
       return [
         ...(city.places || []).map(item => ({ ...item, type: "Places" })),
         ...(city.transport || []).map(item => ({ ...item, type: "Transport" })),
         ...(city.hotels || []).map(item => ({ ...item, type: "Hotels" }))
       ];
     } else {
-      // Return only items of selected category
-      const categoryKey = activeCategory.toLowerCase(); // "places", "transport", or "hotels"
+      const categoryKey = activeCategory.toLowerCase();
       return (city[categoryKey] || []).map(item => ({ ...item, type: activeCategory }));
     }
-  }, [city, activeCategory]); // ✅ Re-run when category changes
+  }, [city, activeCategory]);
 
-  // ✅ ADD: Handle filter changes from FilterBar
   const handleFilterChange = (category) => {
     setActiveCategory(category);
   };
@@ -77,8 +70,13 @@ export default function ProductPage() {
     <>
       <Navbar />
       
-      {/* ✅ PASS: handleFilterChange to HeroProduct → FilterBar */}
-      <HeroProduct onFilterChange={handleFilterChange} activeCategory={activeCategory} />
+      {/* ✅ PASS: City image and name to HeroProduct */}
+      <HeroProduct 
+        onFilterChange={handleFilterChange} 
+        activeCategory={activeCategory}
+        cityImage={city.image}    // ✅ Dynamic hero image
+        cityName={city.name}      // ✅ City name overlay
+      />
 
       {/* City header */}
       <div className="max-w-5xl mx-auto px-4 pt-6">
@@ -108,7 +106,7 @@ export default function ProductPage() {
               title={item.name}
               description={item.description}
               image={item.image}
-              type={item.type} // ✅ Pass type for badge display
+              type={item.type}
             >
               <BtnProduct
                 item={item}

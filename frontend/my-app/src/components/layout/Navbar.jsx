@@ -40,8 +40,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="bg-black/95 backdrop-blur-sm text-white font-heading px-6 py-4 sticky top-0 z-50 shadow-lg">
-        <div className="container mx-auto flex justify-between items-center">
+      <nav className="bg-black/95 backdrop-blur-sm text-white font-heading px-4 md:px-6 py-4 sticky top-0 z-50 shadow-lg">
+        
+        {/* ✅ Larger container for big screens */}
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <span className="text-3xl font-extrabold text-orange-500 group-hover:text-orange-400 transition-colors">
               L
@@ -51,7 +55,10 @@ export default function Navbar() {
             </span>
           </Link>
 
-          <ul className="hidden md:flex gap-8 items-center relative">
+          {/* Desktop Navigation - Adjusted for Large Screens */}
+          <ul className="hidden md:flex gap-6 lg:gap-10 xl:gap-12 items-center relative">
+            
+            {/* Animated Sliding Underline */}
             <span
               className="absolute -bottom-1 h-0.5 bg-orange-500 rounded-full transition-all duration-300 ease-out"
               style={{
@@ -67,12 +74,14 @@ export default function Navbar() {
               }}
             ></span>
 
+            {/* User Name (if connected) */}
             {connected && user && (
-              <li className="text-sm text-gray-300">
+              <li className="text-sm text-gray-300 hidden lg:block">
                 {user.firstname} {user.lastname}
               </li>
             )}
 
+            {/* Nav Links */}
             {navLinks.map((link, index) => (
               <li key={link.path} ref={(el) => (navRefs.current[index] = el)}>
                 <Link
@@ -90,6 +99,7 @@ export default function Navbar() {
               </li>
             ))}
 
+            {/* Auth Buttons */}
             {connected ? (
               <li>
                 <button
@@ -115,6 +125,7 @@ export default function Navbar() {
             )}
           </ul>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-white hover:text-orange-400 transition-colors"
@@ -140,6 +151,7 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-white/10">
             <ul className="flex flex-col gap-4 pt-4">
