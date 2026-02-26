@@ -88,119 +88,20 @@ cd backend
 npm install
 Install Frontend dependencies
 cd ../frontend/my-app
-npm install
+npm install 
+```
 
 ## Environment Variables
-Create a .env file in the backend/ folder:
-
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-NODE_ENV=development
-
-Description:
-
-PORT → Backend server port
-
-MONGO_URI → MongoDB connection string
-
-JWT_SECRET → Secret key for authentication
-
-NODE_ENV → Environment mode
-
 
 ## Running the Application
-cd backend
-npm run dev
-
-or
-
-npm start
-
-Backend runs on:
-
-http://localhost:5000
-Run Frontend
-cd frontend/my-app
-npm start
-
-Frontend runs on:
-
-http://localhost:3000
 
 ## Project Management & Methodology
-This project follows an Agile methodology.
-
-Tools Used
-
-Jira → Task management
-
-GitHub → Source code management
-
-Git → Version control
-
-Figma → UI/UX design
-
-Workflow
-
-User story creation
-
-Task planning
-
-Feature-based development
-
-Testing and validation
-
-Continuous improvement
 
 ## Design (UI/UX)
-The UI/UX was designed using Figma.
-
-Goals
-
-Intuitive interface
-
-Smooth user experience
-
-Responsive design
-
-Clear navigation
-
-Designed Components
-
-Destination pages
-
-Admin dashboard
-
-Detail pages
-
-Reusable UI components
 
 ## Contributing
-Contributions are welcome.
-
-Steps:
-
-Fork the repository
-
-Create a branch
-
-git checkout -b feature/your-feature-name
-
-Commit changes
-
-git commit -m "Add new feature"
-
-Push branch
-
-git push origin feature/your-feature-name
-
-Open a Pull Request
 
 ## License
-This project is licensed under the MIT License.
-
-You are free to use, modify, and distribute this software with proper attribution.
 
 ## Team
 Jihane Mansouri: mansourijihane23@gmail.com
