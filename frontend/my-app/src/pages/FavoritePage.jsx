@@ -1,4 +1,4 @@
-// pages/FavoritePage.jsx
+
 import { useState, useEffect } from "react";
 import DashboardLayout from "../components/layout/DashboardLayout";
 import DashboardSearch from "../components/ui/DashboardSearch";
