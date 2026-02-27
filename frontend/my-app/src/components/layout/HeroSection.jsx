@@ -1,46 +1,122 @@
+// import React from "react";
+// import HeroPic from "../../assets/HeroPic.jpg";
+// import SearchBar from "../ui/SearchBar";
+// import Card from "../common/Card";
+
+// export default function HeroSection({ children }) {
+//   return (
+//     <>
+//       {/* Navigation Container */}
+//       <div className="relative z-20">
+//         {children}
+//       </div>
+
+//       {/* Hero Section */}
+//       <section
+//         className="relative h-[85vh] min-h-[600px] bg-center bg-cover bg-fixed overflow-hidden flex flex-col justify-end"
+//         style={{
+//           backgroundImage: `url(${HeroPic})`,
+//           backgroundPosition: "50% 30%",
+//         }}
+//       >
+//         {/* Dark Overlay - Smooth Gradient */}
+//         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20"></div>
+
+//         {/* Hero Content */}
+//         <div className="container mx-auto px-6 pb-16 md:pb-24 z-10">
+//           {/* Main Title */}
+//           <h1 className="font-heading font-bold text-white mb-4 tracking-tight">
+//             <span className="text-6xl md:text-7xl lg:text-8xl text-orange-500 font-extrabold">P</span>
+//             <span className="text-3xl md:text-4xl lg:text-5xl ml-2">LAN YOUR ESCAPE</span>
+//           </h1>
+
+//           {/* Subtitle */}
+//           <p className="max-w-xl font-heading text-white/90 text-base md:text-lg lg:text-xl pb-8 leading-relaxed">
+//             Discover amazing destinations and create unforgettable memories with our curated travel experiences
+//           </p>
+
+//           {/* Search Bar */}
+//           <div className="max-w-2xl">
+//             <SearchBar />
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ✅ Stats Section - EXACTLY AS PROVIDED (No Changes) */}
+//       <div className="text-black overflow-visible relative min-h-[20vh] font-heading flex justify-evenly items-start m-0 pb-2">    
+//         <Card num = "+10" text="total customers"/>
+//         <Card num = "+10" text="total customers"/>
+//         <Card num = "+10" text="total customers"/>
+//         {/* <h1 className="font-heading font-semibold text-3xl text-center absolute translate-y-24 z-10">Destination Options</h1> */}
+//       </div>
+//     </>
+//   );
+// }
+
+// components/layout/HeroSection.jsx
 import React from "react";
-import HeroPic from "../../assets/HeroPic.jpg";
 import SearchBar from "../ui/SearchBar";
 import Card from "../common/Card";
 
 export default function HeroSection({ 
   children,
-  onCountryChange,    // ✅ ADD: Forward to SearchBar
-  onSearchChange,     // ✅ ADD: Forward to SearchBar
-  selectedCountry     // ✅ ADD: Forward to SearchBar
+  onCountryChange,
+  onSearchChange,
+  selectedCountry,
+  heroImage,        // ✅ From API
+  countryName       // ✅ From API
 }) {
+  
+  // ✅ Build full image URL from API
+  const backgroundImage = heroImage 
+    ? (heroImage.startsWith('http') 
+        ? heroImage 
+        : `http://localhost:5000${heroImage}`)  // ← Backend serves images
+    : '/images/hero-default.jpg';
+
   return (
     <>
-      {/* Navigation Container */}
+      {/* Navigation */}
       <div className="relative z-20">
         {children}
       </div>
 
-      {/* Hero Section */}
+      {/* ✅ Hero with dynamic background from API */}
       <section
-        className="relative h-[85vh] min-h-[600px] bg-center bg-cover bg-fixed overflow-hidden flex flex-col justify-end"
+        className="relative h-[85vh] min-h-[600px] bg-center bg-cover bg-fixed overflow-hidden flex flex-col justify-end transition-all duration-500"
         style={{
-          backgroundImage: `url(${HeroPic})`,
+          backgroundImage: `url(${backgroundImage})`,  // ← From backend!
           backgroundPosition: "50% 30%",
         }}
       >
-        {/* Dark Overlay */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20"></div>
 
-        {/* Hero Content */}
+        {/* ✅ Country Badge */}
+        {countryName && (
+          <div className="absolute top-6 left-6 z-10">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/90 backdrop-blur-sm 
+                           text-white font-heading font-bold rounded-xl shadow-lg">
+              <span>{selectedCountry === "ma" ? "🇲🇦" : "🇫"}</span>
+              <span>{countryName}</span>
+            </span>
+          </div>
+        )}
+
+        {/* Content */}
         <div className="container mx-auto px-6 pb-16 md:pb-24 z-10">
-          {/* Main Title */}
           <h1 className="font-heading font-bold text-white mb-4 tracking-tight">
             <span className="text-6xl md:text-7xl lg:text-8xl text-orange-500 font-extrabold">P</span>
             <span className="text-3xl md:text-4xl lg:text-5xl ml-2">LAN YOUR ESCAPE</span>
           </h1>
 
-          {/* Subtitle */}
           <p className="max-w-xl font-heading text-white/90 text-base md:text-lg lg:text-xl pb-8 leading-relaxed">
-            Discover amazing destinations and create unforgettable memories with our curated travel experiences
+            {selectedCountry === "ma" 
+              ? "Discover the magic of Morocco: ancient medinas, Sahara dunes, and vibrant culture"
+              : "Explore the beauty of France: romantic Paris, stunning coastlines, and world-class cuisine"
+            }
           </p>
 
-          {/* ✅ Search Bar with filter props */}
           <div className="max-w-2xl">
             <SearchBar 
               onCountryChange={onCountryChange}
@@ -51,7 +127,7 @@ export default function HeroSection({
         </div>
       </section>
 
-      {/* Stats Section (unchanged) */}
+      {/* Stats */}
       <div className="text-black overflow-visible relative min-h-[20vh] font-heading flex justify-evenly items-start m-0 pb-2">
         <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-neutral-50/80 to-white/80 backdrop-blur-sm -z-10 rounded-2xl"></div>
         <Card num="+10K" text="Happy Customers" />
@@ -61,93 +137,3 @@ export default function HeroSection({
     </>
   );
 }
-
-// components/layout/HeroSection.jsx
-// import React from "react";
-// import SearchBar from "../ui/SearchBar";
-// import Card from "../common/Card";
-
-// export default function HeroSection({ 
-//   children,
-//   onCountryChange,
-//   onSearchChange,
-//   selectedCountry,
-//   heroImage,        // ✅ ADD: Dynamic hero image URL
-//   countryName       // ✅ ADD: Country name for overlay
-// }) {
-  
-//   // ✅ Fallback to default if no image provided
-//   const backgroundImage = heroImage 
-//     ? (heroImage.startsWith('http') ? heroImage : `http://localhost:5000${heroImage}`)
-//     : '/images/hero-default.jpg';
-
-//   return (
-//     <>
-//       {/* Navigation Container */}
-//       <div className="relative z-20">
-//         {children}
-//       </div>
-
-//       {/* ✅ Hero Section with Dynamic Background */}
-//       <section
-//         className="relative h-[85vh] min-h-[600px] bg-center bg-cover bg-fixed overflow-hidden flex flex-col justify-end transition-all duration-500"
-//         style={{
-//           backgroundImage: `url(${backgroundImage})`,
-//           backgroundPosition: "50% 30%",
-//         }}
-//       >
-//         {/* Dark Overlay - Smooth Gradient */}
-//         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 transition-opacity duration-500"></div>
-
-//         {/* ✅ Country Badge Overlay (Top Right) */}
-//         {countryName && (
-//           <div className="absolute top-6 right-6 z-10">
-//             <span className="inline-flex items-center gap-2 px-4 py-2 bg-orange-500/90 backdrop-blur-sm 
-//                            text-white font-heading font-bold rounded-xl shadow-lg
-//                            animate-fade-in-down">
-//               <span>{selectedCountry === "ma" ? "🇲🇦" : "🇫🇷"}</span>
-//               <span>{countryName}</span>
-//             </span>
-//           </div>
-//         )}
-
-//         {/* Hero Content */}
-//         <div className="container mx-auto px-6 pb-16 md:pb-24 z-10">
-//           {/* Main Title */}
-//           <h1 className="font-heading font-bold text-white mb-4 tracking-tight">
-//             <span className="text-6xl md:text-7xl lg:text-8xl text-orange-500 font-extrabold">P</span>
-//             <span className="text-3xl md:text-4xl lg:text-5xl ml-2">LAN YOUR ESCAPE</span>
-//           </h1>
-
-//           {/* Subtitle - Dynamic based on country */}
-//           <p className="max-w-xl font-heading text-white/90 text-base md:text-lg lg:text-xl pb-8 leading-relaxed">
-//             {selectedCountry === "ma" 
-//               ? "Discover the magic of Morocco: ancient medinas, Sahara dunes, and vibrant culture"
-//               : "Explore the beauty of France: romantic Paris, stunning coastlines, and world-class cuisine"
-//             }
-//           </p>
-
-//           {/* Search Bar */}
-//           <div className="max-w-2xl">
-//             <SearchBar 
-//               onCountryChange={onCountryChange}
-//               onSearchChange={onSearchChange}
-//               selectedCountry={selectedCountry}
-//             />
-//           </div>
-//         </div>
-
-//         {/* ✅ Subtle Fade Overlay for Smooth Image Transition */}
-//         <div className="absolute inset-0 bg-black/0 pointer-events-none transition-opacity duration-500"></div>
-//       </section>
-
-//       {/* Stats Section */}
-//       <div className="text-black overflow-visible relative min-h-[20vh] font-heading flex justify-evenly items-start m-0 pb-2">
-//         <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-neutral-50/80 to-white/80 backdrop-blur-sm -z-10 rounded-2xl"></div>
-//         <Card num="+10K" text="Happy Customers" />
-//         <Card num="+50" text="Destinations" />
-//         <Card num="+100" text="Partner Hotels" />
-//       </div>
-//     </>
-//   );
-// }
