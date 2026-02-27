@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { clearSession, getCurrentUser, isAuthenticated } from "../../utils/auth";
+import Frame from '../../assets/Frame3.png'
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -46,14 +47,14 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <span className="text-3xl font-extrabold text-orange-500 group-hover:text-orange-400 transition-colors">
-              L
-            </span>
-            <span className="text-xl font-semibold tracking-wide group-hover:text-orange-400 transition-colors">
-              ogo
-            </span>
-          </Link>
+      {/* Logo */}
+<Link to="/" className="flex items-center gap-2 group">
+  <img 
+    src={Frame}
+    alt="Logo" 
+    className="h-12 md:h-14 w-auto object-contain group-hover:opacity-90 transition-opacity m-0 p-0"
+  />
+</Link>
 
           {/* Desktop Navigation - Adjusted for Large Screens */}
           <ul className="hidden md:flex gap-6 lg:gap-10 xl:gap-12 items-center relative">
