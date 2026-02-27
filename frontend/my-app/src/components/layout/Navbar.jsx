@@ -46,13 +46,11 @@ export default function Navbar() {
         {/* ✅ Larger container for big screens */}
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           
-          {/* Logo */}
-      {/* Logo */}
 <Link to="/" className="flex items-center gap-2 group">
   <img 
     src={Frame}
     alt="Logo" 
-    className="h-12 md:h-14 w-auto object-contain group-hover:opacity-90 transition-opacity m-0 p-0"
+    className="h-6 md:h-10 w-auto object-contain group-hover:opacity-90 transition-opacity m-0 p-0"
   />
 </Link>
 

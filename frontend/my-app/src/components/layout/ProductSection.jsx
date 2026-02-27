@@ -14,7 +14,7 @@ export default function ProductSection({ children }) {
         
         {/* Section Title */}
         <h2 className="font-heading font-bold text-3xl md:text-4xl text-neutral-800 mb-3">
-          Explore Morocco
+          Explore Our Destinations
         </h2>
         
         {/* Subtitle */}
