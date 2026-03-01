@@ -1,5 +1,5 @@
 # App Guide Touristique Interactif
-![App Screen](../frontend/my_app/src/assets/screen_of_the_app.PNG)
+![App Screen](./frontend/my_app/src/assets/screen_of_the_app.PNG)
 ## 📖 Description du Projet
 
 Ce projet est une application web dédiée à la planification de voyages. Elle permet aux utilisateurs de rechercher des destinations à travers le monde et d’accéder à des informations essentielles telles que les hôtels, les moyens de transport, les restaurants ainsi que les sites historiques et culturels.
