@@ -108,4 +108,4 @@ npm install
 Jihane Mansouri: mansourijihane23@gmail.com
 Othamn Chafik: Chafik.otmane96@gmail.com
 Selmane Oukaya: salmane_dofus@hotmail.com
-Ayoub Mohammed: salmane_dofus@hotmail.com
+Ayoub Mohammed: essbaiayoubmohammed@gmail.com
