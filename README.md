@@ -94,11 +94,36 @@ npm install
 
 ## Environment Variables
 
-## Running the Application
+## 🚀 Running the Application
+
+This project contains:
+
+- **Frontend:** React (`frontend/my-app`)
+- **Backend:** Express + MongoDB (`backend`)
+- **Database:** MongoDB (local)
+
+---
+
+## 📦 Prerequisites
+
+Make sure you have installed:
+
+- Node.js (v18+ recommended)
+- npm
+- MongoDB (running locally on port `27017`)
+
+Check versions:
+
+```bash
+node -v
+npm -v
+mongod --version
+```
 
 ## Project Management & Methodology
 
 ## Design (UI/UX)
+![App Screen](./frontend/my-app/src/assets/figma_pic.PNG)
 
 ## Contributing
 
