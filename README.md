@@ -131,7 +131,7 @@ Figma est un outil puissant pour la conception d'interfaces utilisateur (UI) et 
 
 Cette section présente la répartition des contributions de chaque membre du groupe, basée sur l’historique GitHub (commits, ajouts de code, suppressions et modifications).
 
-![Statistiques des contributions](docs/contributions.png)
+![Statistiques des contributions](./frontend/my-app/src/assets/contributions.png)
 
 ### 🔎 Détails
 
