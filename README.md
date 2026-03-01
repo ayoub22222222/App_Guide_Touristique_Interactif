@@ -127,7 +127,37 @@ mongod --version
 
 Figma est un outil puissant pour la conception d'interfaces utilisateur (UI) et l'expérience utilisateur (UX). Il permet de créer des maquettes interactives, de collaborer en temps réel avec les équipes et de tester facilement des prototypes. Grâce à ses fonctionnalités de design et de prototypage, Figma aide à concevoir des applications et sites web intuitifs et esthétiques, tout en améliorant l'expérience globale de l'utilisateur.
 
-## Contributing
+## 👥 Contributions de l’équipe
+
+Cette section présente la répartition des contributions de chaque membre du groupe, basée sur l’historique GitHub (commits, ajouts de code, suppressions et modifications).
+
+![Statistiques des contributions](docs/contributions.png)
+
+### 🔎 Détails
+
+- Les contributions ont été mesurées à partir des commits réalisés sur le dépôt
+- Chaque membre a participé au développement du frontend, du backend et de l’intégration
+- Le graphique ci-dessus illustre la quantité de code ajoutée et modifiée par personne
+
+> 📌 Les statistiques détaillées sont disponibles dans l’onglet **Insights → Contributors** du dépôt GitHub.
+
+## ☁️ Aperçu de l’Architecture Cloud
+![App Screen](./frontend/my-app/src/assets/aws_app.png)
+
+Cette application est déployée dans un **Virtual Private Cloud (VPC)** AWS contenant deux sous-réseaux :
+
+- **Sous-réseau public :** héberge une instance EC2 qui exécute le frontend React. Cette instance est accessible depuis Internet et sert l’interface utilisateur.
+- **Sous-réseau privé :** héberge une instance EC2 distincte qui exécute le backend Express ainsi que la base de données MongoDB. Cette instance n’est pas directement exposée à Internet pour des raisons de sécurité.
+
+### 🔄 Flux de requêtes
+
+1. L’**utilisateur** accède à l’application React via l’instance EC2 publique.  
+2. Le frontend envoie des requêtes HTTP/REST API vers le backend situé dans le sous-réseau privé.  
+3. Le backend traite la requête, interroge la **base de données MongoDB**, puis renvoie des données au format JSON.  
+4. Le frontend affiche les données pour l’utilisateur.
+
+Cette architecture améliore la sécurité en isolant le backend et la base de données dans un sous-réseau privé, tout en rendant uniquement le frontend accessible publiquement.
+
 
 ## License
 
