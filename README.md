@@ -1,5 +1,5 @@
 # App Guide Touristique Interactif
-![App screenl](./assets/screen_of_the_app.PNG)
+![App Screen](./frontend/src/assets/screen_of_the_app.PNG)
 
 ## 📖 Description du Projet
 
