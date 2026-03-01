@@ -125,6 +125,8 @@ mongod --version
 ## Design (UI/UX)
 ![App Screen](./frontend/my-app/src/assets/figma_pic.PNG)
 
+Figma est un outil puissant pour la conception d'interfaces utilisateur (UI) et l'expérience utilisateur (UX). Il permet de créer des maquettes interactives, de collaborer en temps réel avec les équipes et de tester facilement des prototypes. Grâce à ses fonctionnalités de design et de prototypage, Figma aide à concevoir des applications et sites web intuitifs et esthétiques, tout en améliorant l'expérience globale de l'utilisateur.
+
 ## Contributing
 
 ## License
