@@ -13,7 +13,7 @@ L’objectif principal de ce projet est de centraliser les informations de voyag
 
 ## 🛠️ Technologies Utilisées
 
-- **Frontend :** React, HTML, CSS, JavaScript  
+- **Frontend :** React, HTML, tailwind, JavaScript  
 - **Backend :** Node.js, Express.js  
 - **Base de données :** MongoDB  
 - **Autres outils :** GitHub, Jira, Figma
