@@ -22,7 +22,7 @@ L’objectif principal de ce projet est de centraliser les informations de voyag
 ## Project Structure
 
 This project follows a full-stack architecture with separate **backend** and **frontend** directories.
-
+```bash
 APP_GUIDE_TOURISTIQUE/
 │
 ├── backend/
@@ -65,7 +65,8 @@ APP_GUIDE_TOURISTIQUE/
 │       ├── README.md          
 │       └── LICENSE            
 │
-└── README.md              
+└── README.md
+```
 
 ## Installation
 Make sure you have installed:
