@@ -27,45 +27,45 @@ APP_GUIDE_TOURISTIQUE/
 │
 ├── backend/
 │   ├── src/
-│   │   ├── config/         # Configuration files (database, environment, app settings)
-│   │   ├── controllers/    # Route controllers (handle HTTP requests and responses)
-│   │   ├── middlewares/    # Custom middleware functions (auth, validation, etc.)
-│   │   ├── models/         # Database models and schemas
-│   │   ├── public/         # Static files (images, uploads, etc.)
-│   │   ├── repositories/   # Data access layer (database queries and logic)
-│   │   ├── routes/         # API route definitions
-│   │   ├── services/       # Business logic and service layer
-│   │   ├── app.js          # Express app configuration
-│   │   └── server.js       # Server entry point
+│   │   ├── config/         
+│   │   ├── controllers/    
+│   │   ├── middlewares/    
+│   │   ├── models/         
+│   │   ├── public/         
+│   │   ├── repositories/   
+│   │   ├── routes/         
+│   │   ├── services/       
+│   │   ├── app.js         
+│   │   └── server.js      
 │   │
-│   ├── .gitignore         # Git ignore rules
-│   ├── package.json       # Backend dependencies and scripts
-│   ├── package-lock.json  # Dependency lock file
-│   └── info.txt           # Additional backend information
+│   ├── .gitignore        
+│   ├── package.json       
+│   ├── package-lock.json  
+│   └── info.txt           
 │
 ├── frontend/
 │   └── my-app/
-│       ├── node_modules/  # Installed dependencies
-│       ├── public/        # Static public files
+│       ├── node_modules/  
+│       ├── public/        
 │       ├── src/
-│       │   ├── assets/     # Images, icons, and static resources
-│       │   ├── components/ # Reusable React components
-│       │   ├── Data/       # Static or mock data files
-│       │   ├── pages/      # Application pages (views)
-│       │   ├── utils/      # Utility/helper functions
-│       │   ├── App.js      # Main React component
-│       │   ├── App.css     # App styles
-│       │   ├── index.js    # React entry point
-│       │   └── index.css   # Global styles
+│       │   ├── assets/     
+│       │   ├── components/ 
+│       │   ├── Data/       
+│       │   ├── pages/      
+│       │   ├── utils/      
+│       │   ├── App.js      
+│       │   ├── App.css     
+│       │   ├── index.js    
+│       │   └── index.css   
 │       │
-│       ├── package.json       # Frontend dependencies and scripts
-│       ├── package-lock.json  # Dependency lock file
-│       ├── tailwind.config.js # Tailwind CSS configuration
-│       ├── postcss.config.js  # PostCSS configuration
-│       ├── README.md          # Frontend documentation
-│       └── LICENSE            # License file
+│       ├── package.json      
+│       ├── package-lock.json 
+│       ├── tailwind.config.js 
+│       ├── postcss.config.js  
+│       ├── README.md          
+│       └── LICENSE            
 │
-└── README.md              # Project documentation
+└── README.md              
 
 ## Installation
 Make sure you have installed:
